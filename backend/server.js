@@ -32,6 +32,22 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const query = "SELECT * FROM users WHERE email = ? AND password = ?";
+        const [rows] = await db.query(query, [email, password]);
+
+        if (rows.length > 0) {
+            res.json({ message: "Connexion réussie !", user: rows[0] });
+        } else {
+            res.status(401).json({ error: "Email ou mot de passe incorrect" });
+        }
+    } catch (err) {
+        res.status(500).json({ error: "Erreur lors de la connexion" });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Serveur demarre sur le port ${PORT}`);
 });
