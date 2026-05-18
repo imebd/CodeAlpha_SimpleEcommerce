@@ -31,10 +31,11 @@ app.post('/api/register', async (req, res) => {
         res.status(500).json({ error: "Erreur lors de l'inscription" });
     }
 });
+
 app.listen(PORT, () => {
     console.log(`Serveur demarre sur le port ${PORT}`);
 });
-// Test visuel de la connexion
+
 db.query("SELECT 1")
     .then(() => {
         console.log(" BRAVO : La connexion à MySQL (XAMPP) est établie !");
