@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Panier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Mon Panier</h1>
+    <a href="index.html" class="btn-nav">← Continuer mes achats</a>
+</header>
+
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Sous-total</th>
+            </tr>
+        </thead>
+        <tbody id="lignes"></tbody>
+    </table>
+
+    <div class="cart-summary">
+        <h3 id="total" style="margin:0;">Total : 0 DH</h3>
+        <div class="cart-buttons">
+            <button onclick="vider()" class="btn-nav btn-logout">Vider le panier</button>
+            <button onclick="validerCommande()" class="btn-nav" style="background-color:#28a745;">Passer la commande</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    function afficherPanier() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const tbody = document.getElementById('lignes');
+        let total = 0;
+        tbody.innerHTML = "";
+
+        if (cart.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Votre panier est vide.</td></tr>";
+            document.getElementById('total').innerText = `Total : 0 DH`;
+            return;
+        }
+
+        cart.forEach(item => {
+            const sousTotal = item.price * item.quantity;
+            total += sousTotal;
+            tbody.innerHTML += `
+                <tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.price} DH</td>
+                    <td>${item.quantity}</td>
+                    <td style="color:#28a745; font-weight:bold;">${sousTotal} DH</td>
+                </tr>`;
+        });
+        document.getElementById('total').innerText = `Total : ${total} DH`;
+    }
+
+    function vider() {
+        if(confirm("Voulez-vous vraiment vider votre panier ?")) {
+            localStorage.removeItem('cart');
+            afficherPanier();
+        }
+    }
+
+    function validerCommande() {
+        const user = localStorage.getItem('user');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        if (cart.length === 0) {
+            alert("Votre panier est vide !");
+            return;
+        }
+        if (!user) {
+            alert("Veuillez vous connecter avant de passer une commande !");
+            window.location.href = "login.html";
+            return;
+        }
+        
+        alert("Commande traitée avec succès ! Merci pour votre confiance.");
+        localStorage.removeItem('cart');
+        window.location.href = "index.html";
+    }
+
+    afficherPanier();
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="index.html" class="btn-nav">← Revenir à l'accueil</a>
+</div>
+
+<div class="auth-wrapper">
+
+    <div class="container-box" style="margin: 0; width: 320px;">
+        <h3>Créer un compte</h3>
+        <form id="regForm">
+            <div class="form-group">
+                <label>Nom d'utilisateur</label>
+                <input type="text" id="regUser" placeholder="Ex: Imane" required>
+            </div>
+            <div class="form-group">
+                <label>Adresse Email</label>
+                <input type="email" id="regEmail" placeholder="Ex: nom@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" id="regPass" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-action" style="background-color:#007bff; margin-top:10px;">S'inscrire</button>
+        </form>
+    </div>
+
+    <div class="container-box" style="margin: 0; width: 320px;">
+        <h3>Se connecter</h3>
+        <form id="logForm">
+            <div class="form-group">
+                <label>Adresse Email</label>
+                <input type="email" id="logEmail" placeholder="votre@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" id="logPass" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-action" style="margin-top:10px;">Connexion</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    // Inscription -> /api/register
+    document.getElementById('regForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: document.getElementById('regUser').value,
+                    email: document.getElementById('regEmail').value,
+                    password: document.getElementById('regPass').value
+                })
+            });
+            const data = await response.json();
+            alert(data.message || data.error);
+            if(response.ok) document.getElementById('regForm').reset();
+        } catch (err) { alert("Erreur de connexion au serveur."); }
+    });
+
+    // Connexion -> /api/login
+    document.getElementById('logForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: document.getElementById('logEmail').value,
+                    password: document.getElementById('logPass').value
+                })
+            });
+            const data = await response.json();
+            if(response.ok) {
+                alert("Ravi de vous revoir !");
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = "index.html";
+            } else {
+                alert(data.error);
+            }
+        } catch (err) { alert("Erreur de connexion au serveur."); }
+    });
+</script>
+</body>
+</html>

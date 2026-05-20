@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du Produit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container-box" id="detail">Chargement des informations...</div>
+
+<div style="text-align: center;">
+    <a href="index.html">← Retourner à l'accueil</a>
+</div>
+
+<script>
+    const idUrl = new URLSearchParams(window.location.search).get('id');
+
+    async function chargerDetail() {
+        try {
+            const res = await fetch('http://localhost:5000/api/products');
+            const produits = await res.json();
+            const p = produits.find(item => item.id == idUrl);
+
+            if(p) {
+                document.getElementById('detail').innerHTML = `
+                    <h2>${p.name || 'Produit'}</h2>
+                    <p><strong>Identifiant :</strong> #${p.id}</p>
+                    <p class="price" style="font-size:24px; text-align:center;">${p.price} DH</p>
+                    <button onclick="ajouterAuPanier(${p.id}, '${p.name}', ${p.price})" class="btn-action" style="margin-top:20px;">Ajouter au Panier</button>
+                `;
+            } else {
+                document.getElementById('detail').innerHTML = "<p style='color:red;'>Produit introuvable.</p>";
+            }
+        } catch (err) {
+            document.getElementById('detail').innerHTML = "<p style='color:red;'>Erreur de chargement.</p>";
+        }
+    }
+
+    function ajouterAuPanier(id, name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const exist = cart.find(item => item.id === id);
+        if (exist) { exist.quantity += 1; } 
+        else { cart.push({ id, name, price, quantity: 1 }); }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert("Ajouté !");
+    }
+
+    chargerDetail();
+</script>
+</body>
+</html>

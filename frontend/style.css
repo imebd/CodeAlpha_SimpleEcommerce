@@ -1,0 +1,211 @@
+/* Styles Globaux et Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* En-tête (Header) */
+header {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #222;
+}
+
+/* Barre de Navigation et Boutons */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav span {
+    font-weight: 600;
+    color: #555;
+}
+
+.btn-nav {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-cart {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-logout {
+    background-color: #dc3545;
+}
+
+/* Grille des Produits (Boutique) */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e1e8ed;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+    margin: 10px 0;
+}
+
+.card .view-link {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Boutons d'action standards */
+.btn-action {
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Conteneurs de pages (Détails, Panier, Auth) */
+.container-box {
+    background: white;
+    border: 1px solid #e1e8ed;
+    padding: 30px;
+    max-width: 500px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.container-box h2, .container-box h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container-box p {
+    margin-bottom: 12px;
+}
+
+/* Formulaires (Login / Register) */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Tableaux (Panier) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #efefef;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #555;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.cart-buttons {
+    display: flex;
+    gap: 10px;
+}

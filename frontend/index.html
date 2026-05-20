@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>BdBout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>BdBout</h1>
+    <div class="nav" id="menu"></div>
+</header>
+
+<main>
+    <div class="products" id="liste-produits"></div>
+</main>
+
+<script>
+    const user = JSON.parse(localStorage.getItem('user'));
+    const menu = document.getElementById('menu');
+
+    if (user) {
+        menu.innerHTML = `<span>Bonjour, ${user.username}</span>
+                          <a href="cart.html" class="btn-nav btn-cart">🛒 Panier</a>
+                          <button onclick="logout()" class="btn-nav btn-logout">Quitter</button>`;
+    } else {
+        menu.innerHTML = `<a href="login.html" class="btn-nav">Connexion / Inscription</a>
+                          <a href="cart.html" class="btn-nav btn-cart">🛒 Panier</a>`;
+    }
+
+    function logout() {
+        localStorage.removeItem('user');
+        window.location.reload();
+    }
+
+    async function chargerProduits() {
+        try {
+            const res = await fetch('http://localhost:5000/api/products');
+            const produits = await res.json();
+            const liste = document.getElementById('liste-produits');
+
+            produits.forEach(p => {
+                liste.innerHTML += `
+                    <div class="card">
+                        <h3>${p.name || 'Produit'}</h3>
+                        <p class="price">${p.price} DH</p>
+                        <a href="product.html?id=${p.id}" class="view-link">Voir le produit</a>
+                        <button onclick="ajouterAuPanier(${p.id}, '${p.name}', ${p.price})" class="btn-action">Acheter</button>
+                    </div>
+                `;
+            });
+        } catch (err) {
+            console.error("Erreur serveur");
+        }
+    }
+
+    function ajouterAuPanier(id, name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const exist = cart.find(item => item.id === id);
+        if (exist) { exist.quantity += 1; } 
+        else { cart.push({ id, name, price, quantity: 1 }); }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert("Produit ajouté au panier !");
+    }
+
+    chargerProduits();
+</script>
+</body>
+</html>
