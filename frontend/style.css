@@ -7,25 +7,25 @@
 }
 
 body {
-    background-color: #f4f6f9;
-    color: #333;
+    background-color: #f5f2eb; /* Beige clair doux pour le fond */
+    color: #4a3b32;           /* Texte marron foncé pour la lisibilité */
     line-height: 1.6;
     padding: 20px;
 }
 
 a {
-    color: #007bff;
+    color: #800020;           /* Liens en Burgundy (Rouge foncé) */
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
-    color: #0056b3;
+    color: #4a0012;           /* Burgundy plus sombre au survol */
 }
 
 /* En-tête (Header) */
 header {
-    background-color: white;
+    background-color: #5c4033; /* Fond Marron chocolat */
     padding: 20px 30px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -37,7 +37,7 @@ header {
 
 header h1 {
     font-size: 24px;
-    color: #222;
+    color: #f5f2eb;           /* Titre en beige clair */
 }
 
 /* Barre de Navigation et Boutons */
@@ -49,12 +49,12 @@ header h1 {
 
 .nav span {
     font-weight: 600;
-    color: #555;
+    color: #f5f2eb;           /* Texte utilisateur en beige */
 }
 
 .btn-nav {
     padding: 10px 16px;
-    background-color: #007bff;
+    background-color: #800020; /* Boutons de navigation en Burgundy */
     color: white;
     border: none;
     border-radius: 5px;
@@ -63,12 +63,12 @@ header h1 {
 }
 
 .btn-cart {
-    background-color: #ffc107;
+    background-color: #d4b26f; /* Accent beige doré chaud pour le panier */
     color: #212529;
 }
 
 .btn-logout {
-    background-color: #dc3545;
+    background-color: #a62c2b; /* Bouton déconnexion rouge brique/foncé */
 }
 
 /* Grille des Produits (Boutique) */
@@ -80,7 +80,7 @@ header h1 {
 
 .card {
     background: white;
-    border: 1px solid #e1e8ed;
+    border: 1px solid #eadecc; /* Bordure beige subtile */
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -96,13 +96,13 @@ header h1 {
 .card h3 {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #333;
+    color: #5c4033;           /* Titres en Marron */
 }
 
 .card .price {
     font-size: 20px;
     font-weight: bold;
-    color: #28a745;
+    color: #800020;           /* Prix mis en valeur en Burgundy */
     margin: 10px 0;
 }
 
@@ -116,7 +116,7 @@ header h1 {
 .btn-action {
     width: 100%;
     padding: 12px;
-    background-color: #28a745;
+    background-color: #800020; /* Bouton d'achat en Burgundy */
     color: white;
     border: none;
     border-radius: 5px;
@@ -128,7 +128,7 @@ header h1 {
 /* Conteneurs de pages (Détails, Panier, Auth) */
 .container-box {
     background: white;
-    border: 1px solid #e1e8ed;
+    border: 1px solid #eadecc;
     padding: 30px;
     max-width: 500px;
     margin: 40px auto;
@@ -139,6 +139,7 @@ header h1 {
 .container-box h2, .container-box h3 {
     margin-bottom: 20px;
     text-align: center;
+    color: #5c4033;           /* Titres des boîtes en Marron */
 }
 
 .container-box p {
@@ -162,13 +163,13 @@ input {
     width: 100%;
     padding: 10px 12px;
     margin-top: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccbbf;
     border-radius: 5px;
     font-size: 14px;
 }
 
 input:focus {
-    border-color: #007bff;
+    border-color: #800020;    /* Contour de l'input en Burgundy quand on clique */
     outline: none;
 }
 
@@ -186,13 +187,13 @@ table {
 th, td {
     padding: 14px;
     text-align: left;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #f2ebd9;
 }
 
 th {
-    background-color: #f8f9fa;
+    background-color: #ebdcb9; /* Entête de tableau beige plus foncé */
     font-weight: 600;
-    color: #555;
+    color: #5c4033;           /* Écriture entête en Marron */
 }
 
 .cart-summary {
